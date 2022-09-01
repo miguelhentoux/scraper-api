@@ -1,11 +1,11 @@
 # SCRAPER API
-The aim of this project is to build a microservice to crawler solar panels providers' website to collect data of energy generation per plant and also other information about the plant.
+The aim of this project is to build a microservice to crawler solar panel providers' websites to collect data on energy generation per plant and also other information about the plant.
 - **API:** Build with FAST API
 - **Crawler:** Build with Scrapy and Requests
 - **Deploy**: GKE GCloud
 
 # About it
-*Installers* (companies that installs solar panels) have a big challenge to monitor all the solar plants installed, because this data is just available in the *provider* (company that sells solar panels) website. In fact to monitor all the plants of an installer, one has to log multiple times (one for each solar plant) in different websites (depends on the equipment's provider). This API is the base to have all this data in one single place and in one monitoring dashboard.
+*Installers* (companies that install solar panels) have a big challenge to monitor all the solar plants installed because this data is just available on the *provider* (company that sells solar panels) website. In fact to monitor all the plants of an installer, one has to log multiple times (one for each solar plant) on different websites (depending on the equipment's provider). This API is the base to have all this data in one single place and in one monitoring dashboard.
 
 ![diagram-api](./docs/api-diagram.png)
 
@@ -38,5 +38,5 @@ make k8s/run
 
 # Next Steps
 
-1. Implement more spiders to crawl more providers websites.
-2. Build another microservice using Django to server as a platform where installer will have all this data available.
+1. Implement more spiders to crawl more providers' websites.
+2. Build another microservice using Django to server as a platform where the installers will have all this data available.
