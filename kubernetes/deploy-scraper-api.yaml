@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: scraper-api-svc
+  labels:
+    run: scraper-api-svc
+spec:
+  type: NodePort
+  ports:
+  - port: 8000
+    targetPort: 8000
+    protocol: TCP
+    name: "scraper-api"
+  selector:
+    app: scraper-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scraper-api
+  labels:
+    app: scraper-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scraper-api
+  template:
+    metadata:
+      labels:
+        app: scraper-api
+    spec:
+      containers:
+        - name: scraper-api
+          image: scraper_api:dev
+          # imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: secret-scraper-api-path
+              mountPath: "/app/scraper_api/secrets"
+              readOnly: true
+          ports:
+              - containerPort: 8000
+          env:
+            - name: ENVIRONMENT
+              value: dev
+            - name: RUNNING_LOCAL
+              value: 'true'
+      volumes:
+        - name: secret-scraper-api-path
+          secret:
+            secretName: secret-scraper-api-path
+            optional: false
